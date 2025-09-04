@@ -1,9 +1,9 @@
 const CrudRepository = require('./crud-repository');
-const {Task} = require('../models');
+const {Task} = require('../models'); 
 
 class TaskRepository extends CrudRepository{
     constructor(){
-        super(Task);
+        super(Task); // passing the Model to the CrudRepository
     }
 }
 

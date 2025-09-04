@@ -1,3 +1,5 @@
+
+//req.body: title: milkman
 async function taskCreateChecker(req,res,next){
     try{
         if(!req.body.title){
@@ -12,6 +14,7 @@ async function taskCreateChecker(req,res,next){
     next();
 }
 
+// req.params: id: 1
 async function taskGetChecker(req,res,next){
     try{
         if(!req.params.id){
@@ -26,6 +29,7 @@ async function taskGetChecker(req,res,next){
     next();
 }
 
+// req.params: id:1
 async function taskDestoryChecker(req,res,next){
     try{
         if(!req.params.id){
@@ -42,6 +46,7 @@ async function taskDestoryChecker(req,res,next){
     next();
 }
 
+// req.body: title: Project Work, req.params: id: 4
 async function taskUpdateChecker(req,res,next){
     try{
         if(!req.params.id){

@@ -1,5 +1,6 @@
 const {taskService} = require('../services');
 
+// req.body: title: milkman
 async function createTask(req,res) {
     try {
         const response = await taskService.createTask({
@@ -20,6 +21,8 @@ async function createTask(req,res) {
     });
  }
 }
+
+//req.params: id: 1
 async function destroyTask(req,res){
     try {
         const response = await taskService.destroyTask(req.params.id);
@@ -39,6 +42,7 @@ async function destroyTask(req,res){
     }
 }
 
+//req.params: id: 1
 async function getTask(req,res){
     try {
         const response = await taskService.getTask(req.params.id);
@@ -77,6 +81,7 @@ async function getAllTask(req,res){
     }
 }
 
+// req.body: title: HomeWork , req.params: id: 1
 async function updateTask(req,res) {
     try {
         const response = await taskService.updateTask(req.params.id,req.body);
