@@ -1,0 +1,10 @@
+const express = require('express');
+const {taskController} = require('../../controller');
+const {taskMiddleware} = require('../../middlewares');
+const router = express.Router();
+router.post('/tasks/',taskMiddleware.taskCreateChecker,taskController.createTask);
+router.get('/tasks/:id',taskMiddleware.taskGetChecker,taskController.getTask);
+router.get('/tasks',taskController.getAllTask);
+router.delete('/tasks/:id',taskMiddleware.taskDestoryChecker,taskController.destroyTask);
+router.patch('/tasks/:id',taskMiddleware.taskUpdateChecker,taskController.updateTask);
+module.exports = router;
