@@ -3,9 +3,9 @@ const TaskSQLite = require('../model-sqlite/task-sqlite');
 const {isMySQLAvailable} = require('../utils/db-checker');
 const taskRepository = new TaskRepository();
 
-async function createTask(data) {
+async function createTask(data,simulateOffline) {
         try {
-            if(await isMySQLAvailable()){   //Check User online or Offline
+            if(await isMySQLAvailable(simulateOffline)){   //Check User online or Offline
                 await SQLiteToMySQL();      // Sync the data SQLite to the MYSQL
                 const response = await taskRepository.create({...data,completed:true}); // create new Task in MYSQL
                 return response;
@@ -28,15 +28,15 @@ async function SQLiteToMySQL(){
             title: task.title,
             completed: true
         });
-
+        task.completed = true;
         task.synced = true; // Do synced false because next time  pick only new data 
         await task.save();
     }
 }
 
-async function destroyTask(data) {
+async function destroyTask(data,simulateOffline) {
     try {
-        if(await isMySQLAvailable()){    //Check User online or Offline
+        if(await isMySQLAvailable(simulateOffline)){    //Check User online or Offline
             await SQLiteToMySQL();       // Sync the data SQLite to the MYSQL
             const response = await taskRepository.destroy(data); // destroyTask to the MYSQL
             return response;
@@ -53,9 +53,9 @@ async function destroyTask(data) {
     }
 }
 
-async function getTask(data){
+async function getTask(data,simulateOffline){
     try {
-        if(await isMySQLAvailable()){     //Check User online or Offline
+        if(await isMySQLAvailable(simulateOffline)){     //Check User online or Offline
             await SQLiteToMySQL();       // Sync the data SQLite to the MYSQL
             const response  = await taskRepository.get(data); // Get to the MYSQL
             return response;
@@ -68,9 +68,9 @@ async function getTask(data){
     }
 }
 
-async function getAllTask() {
+async function getAllTask(simulateOffline) {
     try {
-        if(await isMySQLAvailable()){   //Check User online or Offline
+        if(await isMySQLAvailable(simulateOffline)){   //Check User online or Offline
             await SQLiteToMySQL();      // Sync the data SQLite to the MYSQL
             const response = await taskRepository.getAll();  // Get All Data to the MYSQL
             return response;
@@ -83,9 +83,9 @@ async function getAllTask() {
     }
 }
 
-async function updateTask(id,data){
+async function updateTask(id,data,simulateOffline){
     try {
-         if(await isMySQLAvailable()){      //Check User online or Offline
+         if(await isMySQLAvailable(simulateOffline)){      //Check User online or Offline
             await SQLiteToMySQL();          // Sync the data SQLite to the MYSQL
             const response = await taskRepository.update(id,data); // Update data in the MYSQL
             return response;

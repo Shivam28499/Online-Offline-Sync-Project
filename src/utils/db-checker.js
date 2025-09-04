@@ -1,9 +1,9 @@
 const { Task } = require('../models');
 
 
-// I do request to the postman there for I am always online condition if I want go offline  then return false and check request
 
-async function isMySQLAvailable() {
+async function isMySQLAvailable(simulateOffline) {
+    if(simulateOffline) return false;
     try {
         await Task.sequelize.authenticate(); // User Online or Offline
         return true; //check for Online  return true if check for Offline return false
