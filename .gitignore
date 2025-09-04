@@ -1,0 +1,6 @@
+.env
+src/config/config.json
+node_modules/
+src/database/tasks.sqlite.js
+src/config
+src/check-sqlite.js
